@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <form action="/importexcel" method="post"  enctype="multipart/form-data">
+            单sheet：
+            <input type="file" name="file"/>
+            <input type="submit">
+        </form>
+        <form action="/importexcelmoresheet" method="post"  enctype="multipart/form-data">
+            多sheet：
+            <input type="file" name="file"/>
+            <input type="submit">
+        </form>
+        <form action="/exportexcle" method="post" >
+            <button type="submit" >导出</button>
+        </form>
+    </body>
+</html>
