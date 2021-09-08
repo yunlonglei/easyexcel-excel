@@ -2,20 +2,17 @@ package com.lei.importexcel.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
-import com.alibaba.excel.ExcelWriter;
-import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.read.builder.ExcelReaderBuilder;
 import com.alibaba.excel.read.metadata.ReadSheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import com.alibaba.excel.write.builder.ExcelWriterBuilder;
 import com.alibaba.fastjson.JSONObject;
+import com.lei.importexcel.excelConfig.CustomCellWriteHandler;
+import com.lei.importexcel.excelConfig.ExcelConfig;
 import com.lei.importexcel.entity.Catagory;
 import com.lei.importexcel.listener.ExcelListener;
 import com.lei.importexcel.service.ExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,6 +32,8 @@ import java.util.*;
 public class ExcleController {
     @Autowired
     ExcelService ExcelService;
+    @Autowired
+    CustomCellWriteHandler customCellWriteHandler;
 
     /**
      * 单sheet导入数据库
@@ -155,6 +154,8 @@ public class ExcleController {
             //实例化表单
 //            Sheet sheet = new Sheet(1, 0, Catagory.class);
             EasyExcel.write(outputStream, Catagory.class)
+                    .registerWriteHandler(ExcelConfig.getStyleStrategy())
+                    .registerWriteHandler(customCellWriteHandler)
                     //导出时添加想要忽略的字段
                     .excludeColumnFiledNames(excludeColumnFiledNames)
                     .excelType(ExcelTypeEnum.XLSX)
