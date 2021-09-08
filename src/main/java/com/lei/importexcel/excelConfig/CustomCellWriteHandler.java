@@ -21,7 +21,6 @@ public class CustomCellWriteHandler extends AbstractCellWriteHandler {
     public void beforeCellCreate(WriteSheetHolder writeSheetHolder, WriteTableHolder writeTableHolder, Row row, Head head, Integer columnIndex, Integer relativeRowIndex, Boolean isHead) {
         // 设置行高测试
         int rowIndex = row.getRowNum();
-        System.out.println("当前行: " + rowIndex);
         short height;
         if (rowIndex == 0) {
             height = 800;
